@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Generating random elements</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		.container div {
+			position: absolute;
+			transition: 1s;
+			cursor: pointer;
+            background-size: contain;
+            background-repeat: no-repeat;
+		}
+	</style>
+</head>
+<body>
+	<div style="overflow:hidden; position:relative; height: 744px; width: 100%;">
+		<div class="container"></div>
+	</div>
+
+	<script>
+		var container = document.querySelector('.container');
+
+        var images = [
+            'bush1.png',
+            'bush2.png',
+            'bush3.png'
+        ];
+
+		for (var i=0; i<20; i=i+1) {
+
+            var randomImageIndex = Math.floor(Math.random()*images.length)
+            var image =images[randomImageIndex];
+
+
+			// var positionTop = Math.random()*100;
+			var positionTop = 50;
+			var positionLeft = Math.random()*100;
+			var positionLeft = 50;
+
+			var elementWidth = Math.random()*500+100;
+			var elementHeight = Math.random()*500+100;
+
+			var elementRotation = Math.random()*360;
+
+			container.innerHTML += `<div style="background-image: url('${image}'); top: ${positionTop}%; left: ${positionLeft}%; width: ${elementWidth}px; height: ${elementHeight}px; transform: rotate(${elementRotation}deg)" onmouseenter="changeSettings(this)"></div>`;
+		}
+
+		function changeSettings(element) {
+
+			var positionTop = Math.random()*100;
+			var positionLeft = Math.random()*100;
+			element.style.top = positionTop + "%";
+			element.style.left = positionLeft + "%";
+
+			var elementWidth = Math.random()*500+100;
+			var elementHeight = Math.random()*500+100;
+			element.style.width = elementWidth + "px";
+			element.style.height = elementHeight + "px";
+
+			var elementRotation = Math.random()*360;
+			element.style.transform = `rotate(${elementRotation}deg)`;
+		}
+	</script>
+</body>
+</html>
