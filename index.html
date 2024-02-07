@@ -29,7 +29,7 @@
    
    <section class="sec"> 
         <h1 id="question">Guess the Animal !</h1>
-        <h3 id="introText">To enter the forest, you should know the animals who are living in the forest!</h3>
+        <h3 id="introText">Explore the adventure! Identify the forest animals to unlock the secrets of the enchanted realms!</h3>
         <img id="animalImage" src="" alt="Animal Image"><br><br>
         <div id="output">
             <input type="text" id="guess" class="cloud-input">
@@ -58,7 +58,6 @@
 
             function setNewQuestion() {
                 roundCount++;
-
                 if (roundCount > 4) {
                     document.getElementById("question").innerText = "Welcome to the Adventure World!";
                     document.getElementById("introText").style.display = "none";
@@ -68,10 +67,8 @@
                 }
 
                 currentAnimal = getRandomAnimal();
-                document.getElementById("question").innerText = `Guess the animal! (Round ${roundCount})`;
-                document.getElementById("animalImage").src = currentAnimal.image;
-                document.getElementById("result").innerText = "";
-                document.getElementById("nextButton").style.display = "none";
+                document.getElementById("question").innerText = `Guess the animal! (Round ${roundCount})`; document.getElementById("animalImage").src = currentAnimal.image;
+                document.getElementById("result").innerText = ""; document.getElementById("nextButton").style.display = "none";
             }
 
             window.onload = setNewQuestion;
@@ -80,7 +77,6 @@
                 const guess = document.querySelector('#guess');
                 const result = document.querySelector('#result');
                 const nextButton = document.getElementById("nextButton");
-
                 const userGuess = guess.value.toLowerCase(); 
 
                 if (userGuess === currentAnimal.name) {
@@ -95,7 +91,6 @@
             function nextQuestion() {
                 setNewQuestion();
             }
-
             var container = document.querySelector('.container');
 
             //bush
