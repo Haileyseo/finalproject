@@ -58,6 +58,7 @@
 
             function setNewQuestion() {
                 roundCount++;
+
                 if (roundCount > 4) {
                     document.getElementById("question").innerText = "Welcome to the Adventure World!";
                     document.getElementById("introText").style.display = "none";
@@ -67,8 +68,10 @@
                 }
 
                 currentAnimal = getRandomAnimal();
-                document.getElementById("question").innerText = `Guess the animal! (Round ${roundCount})`; document.getElementById("animalImage").src = currentAnimal.image;
-                document.getElementById("result").innerText = ""; document.getElementById("nextButton").style.display = "none";
+                document.getElementById("question").innerText = `Guess the animal! (Round ${roundCount})`;
+                document.getElementById("animalImage").src = currentAnimal.image;
+                document.getElementById("result").innerText = "";
+                document.getElementById("nextButton").style.display = "none";
             }
 
             window.onload = setNewQuestion;
@@ -91,6 +94,7 @@
             function nextQuestion() {
                 setNewQuestion();
             }
+
             var container = document.querySelector('.container');
 
             //bush
