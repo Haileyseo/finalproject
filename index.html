@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    
+   <section class="parallax">
+        <div style="overflow:hidden; position:relative; height: 744px; width: 100%; z-index: 10;">
+            <div class="container"></div>
+        </div>
+        <img src="hill1.png" id="hill1">
+        <img src="hill2.png" id="hill2">
+        <img src="hill3.png" id="hill3">
+        <img src="hill4.png" id="hill4">
+        <img src="hill5.png" id="hill5">
+        <img src="tree.png" id="tree">
+        <h2 id="text">Adventure Time! ↓</h2>
+        <img src="leaf.png" id="leaf" style="top: 0; bottom: unset;">
+        <img src="plant.png" id="plant">
+        
+   </section>
+   
+   <section class="sec"> 
+        <h1 id="question">Guess the Animal !</h1>
+        <h3 id="introText">To enter the forest, you should know the animals who are living in the forest!</h3>
+        <img id="animalImage" src="" alt="Animal Image"><br><br>
+        <div id="output">
+            <input type="text" id="guess" class="cloud-input">
+            <button onclick="checkGuess()" class="cloud-button">Submit Guess</button>
+            <button onclick="nextQuestion()" id="nextButton" class="cloud-button" style="display: none;">Next Question</button>
+            <div id="result"></div>
+        </div>        
+    
+        <script>
+            const animals = [
+                { name: "monkey", image: "animal1.png" },{ name: "giraffe", image: "animal2.png" }, { name: "elephant", image: "animal3.png" },
+                { name: "lion", image: "animal4.png" },{ name: "koala", image: "animal5.png" },{ name: "zebra", image: "animal6.png" }, { name: "rhino", image: "animal7.png" },{ name: "ostrich", image: "animal8.png" },
+            ];
+
+            let remainingAnimals = [...animals];
+            let currentAnimal;
+            let roundCount = 0;
+
+            function getRandomAnimal() {
+                if (remainingAnimals.length === 0) {
+                    remainingAnimals = [...animals]; 
+                }
+                const randomIndex = Math.floor(Math.random() * remainingAnimals.length);
+                return remainingAnimals.splice(randomIndex, 1)[0];
+            }
+
+            function setNewQuestion() {
+                roundCount++;
+
+                if (roundCount > 4) {
+                    document.getElementById("question").innerText = "Welcome to the Adventure World!";
+                    document.getElementById("introText").style.display = "none";
+                    document.getElementById("animalImage").style.display = "none";
+                    document.getElementById("output").style.display = "none";
+                    return;
+                }
+
+                currentAnimal = getRandomAnimal();
+                document.getElementById("question").innerText = `Guess the animal! (Round ${roundCount})`;
+                document.getElementById("animalImage").src = currentAnimal.image;
+                document.getElementById("result").innerText = "";
+                document.getElementById("nextButton").style.display = "none";
+            }
+
+            window.onload = setNewQuestion;
+
+            function checkGuess() {
+                const guess = document.querySelector('#guess');
+                const result = document.querySelector('#result');
+                const nextButton = document.getElementById("nextButton");
+
+                const userGuess = guess.value.toLowerCase(); 
+
+                if (userGuess === currentAnimal.name) {
+                    result.innerHTML = `<p>Congratulations! You guessed the animal!</p>`;
+                    nextButton.style.display = "inline";
+                } else {
+                    result.innerHTML = `<p>Wrong guess! Try again.</p>`;
+                    nextButton.style.display = "none";
+                }
+            }
+
+            function nextQuestion() {
+                setNewQuestion();
+            }
+
+            var container = document.querySelector('.container');
+
+            //bush
+            var images = [
+                'bush1.png',
+                'bush2.png',
+                'bush3.png'
+            ];
+
+            for (var i=0; i<18; i=i+1) {
+                var randomImageIndex = Math.floor(Math.random()*images.length)
+                var image =images[randomImageIndex];
+                var positionTop = 25;
+                var positionLeft = 35;
+
+                var elementWidth = Math.random()*500+100;
+                var elementHeight = Math.random()*500+100;
+
+                var elementRotation = Math.random()*360;
+
+                container.innerHTML += `<div class="cloud" style="background-image: url('${image}'); top: ${positionTop}%; left: ${positionLeft}%; width: ${elementWidth}px; height: ${elementHeight}px; transform: rotate(${elementRotation}deg)" onmouseenter="changeSettings(this)"></div>`;
+            }
+
+            function changeSettings(element) {
+                element.style.transform = `rotate(0) scale(0)`;
+            }
+        </script>
+    </section>
+   
+   <script src="script.js"></script>
+</body>
+</html>
